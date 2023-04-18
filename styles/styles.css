@@ -1,9 +1,239 @@
-/* ===== YOUR CSS GOES HERE ===== */
-/* ===== START WITH GLOBAL STYLES THEN USE MEDIA QUERIES FOR LAYOUT ADJUSTMENTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+html {
+    box-sizing: border-box;
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }  
 
 body {
-    background: magenta;
+	font-family: 'Outfit', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #333;
+	background-color: #f6edd9;
 }
+
+header {
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+	color: #fff;
+    padding: 1rem;
+    display: grid;
+    min-height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1570458140964-7e5185e64815?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+    padding: 10vh 2rem;
+    place-items: center;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+header h1 {
+    font-size: 4rem;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+}  
+
+.skip-link {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    text-align: center;
+    color: #fff;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    text-decoration: none;
+  }
+  
+  .skip-link:hover {
+    background-color: #445c9d;
+    color: #fff;
+  }  
+  
+nav {
+    background-color: #fff;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li:first-child {
+    margin-right: auto;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.5rem;
+}
+
+nav ul li a:hover {
+    background-color: #445c9d;
+    color: #fff;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+nav ul li:nth-child(2), nav ul li:nth-child(3){
+    margin-left: 1rem;
+}
+
+main {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+section {
+	margin-bottom: 2rem;
+}
+
+.section-box {
+    border: 1px solid #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 300%;
+    overflow: hidden;
+    max-width: calc(100% - 40px);
+}
+  
+.section-box .image-left {
+    float: left;
+    margin-right: 10px;
+}
+  
+.section-box .image-right {
+    float: right;
+    margin-left: 10px;
+}
+  
+.section-box img {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.section-box .text-wrap {
+    float: left;
+    width: 50%;
+    margin-left: 20px;
+  }  
+
+.section-box .image-left {
+    width: 400px;
+    height: 200px; 
+    margin: 10px;
+    float: left;
+    margin-right: 20px
+}
+  
+.section-box .image-right {
+    width: 400px;
+    height: 200px; 
+    margin: 10px;
+    float: right;
+    margin-left: 20px;
+}
+
+.section-box p {
+    margin-bottom: 10px;
+}
+
+.section-box h1 {
+    text-align: center;
+    color: #00a84a;
+}
+
+h1, h2 {
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
 p {
-    font-size: 2em;
+	margin-bottom: 1rem;
 }
+
+img {
+	max-width: 100%;
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.button {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	background-color: #333;
+	color: #fff;
+	font-weight: bold;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+	background-color: #fff;
+	color: #333;
+	border: 1px solid #333;
+}
+
+.full-screen {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.full-screen h1 {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.full-screen p {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+}
+
+#main-content section:nth-child(5) p {
+    text-align: center;
+  }
+  
+#map {
+    height: 500px;
+    width: 755px;
+  }
+  .popup {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .popup a {
+    color: #445c9d;
+    text-decoration: none;
+  }
