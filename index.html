@@ -34,7 +34,7 @@
 </head>
 <body>
 	<header>
-    <div class="container">
+    <div class="container-title">
       <h1>The Venezuelan Journey</h1>
       <h2>The truth behind how Venezuelans get here, to the US.</h2>
       <p>But let's start with how it all began.</p>    
@@ -46,7 +46,6 @@
 				<li><a href="index.html">Home</a></li>
 				<li><a href="learn-more.html">Learn More</a></li>
 				<li><a href="project.html">Project</a></li>
-				<li><a href="about.html">About</a></li>
 			</ul>
 		</nav>
 	<main>
@@ -110,7 +109,7 @@
 			<div class="image-right">
 			  <img src="https://www.miamiherald.com/latest-news/bd9rnv/picture228554214/alternates/FREE_1140/IMG_1135391924_2_1_8PFD4QGO_L453609903%20(2).JPG">
 			</div>
-			<p>These tensions have had real-world consequences for citizens of both countries. Travel between the United States and Venezuela has become increasingly difficult, with both countries imposing restrictions on each other's citizens. Additionally, the deteriorating economic situation in Venezuela has led to an exodus of people seeking better opportunities elsewhere, with many Venezuelans fleeing to the United States and other countries in the region. The situation has become so dire that it has been labeled a humanitarian crisis by many organizations and governments.</p>
+			<p>These tensions have had real-world consequences for citizens of both countries. Travel between the United States and Venezuela has become increasingly difficult, with both countries imposing restrictions on each other's citizens. Additionally, the deteriorating economic situation in Venezuela has led to an exodus of people seeking better opportunities elsewhere, with many Venezuelans fleeing to the United States and other countries in the region. The situation has become so dire that it has been labeled a humanitarian crisis.</p>
 		  </div>
 		</section>
 
@@ -140,11 +139,13 @@
 			<p>What used to be a direct flight from Maracaibo, Venezuela to Miami, FL, USA has turned into a long journey for Venezuelans trying to reach the United States. It's time for you to learn about the different routes you could take to go from Maracaibo to Miami, the routes I could take from my hometown to the US.</p>
 			<p>Click on the pin to begin!</p>
 			<div id="map"></div>
-			<button onclick="showAllRoutes()">Show all routes</button>
-			<button onclick="showMostExpensiveRoutes()">Show most expensive routes</button>
-			<button onclick="showEasiestRoute()">Show easiest route</button>
-			<button onclick="showPlaneRoutes()">Show routes that can be taken on a plane</button>
-			<button onclick="showMixRoutes()">Show routes that can only be taken by a mix of air and land</button>
+			<button id="show-all-routes">Show all routes</button>
+			<button id="show-expensive-routes">Show expensive routes</button>
+			<button id="show-easiest-route">Show easiest route</button>
+			<button id="show-hardest-route">Show hardest route</button>
+			<button id="show-plane-routes">Show only-by-plane routes</button>
+			<button id="show-mix-routes">Show only mixed-air-land routes</button>
+			<button id="reset-map">Reset map</button>
 		</section>
 
 		<section class="section-box">

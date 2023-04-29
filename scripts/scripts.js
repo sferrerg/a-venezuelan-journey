@@ -1,44 +1,52 @@
-let startingPoints = [{name: "Maracaibo", latlng: [10.6488, -71.6631],
+const startingPoints = [{name: "Maracaibo", latlng: [10.6488, -71.6631],
     routes: [
       {
         destination: "Panama",
-        route: "Panama - Miami",
-        latlng: [8.9824, -79.5199]
+        latlng: [8.9824, -79.5199],
+        route: "Panama - Miami"
+        
       },
       {
         destination: "Santo Domingo",
+        latlng: [18.4861, -69.9312],
         route: "Caracas - Santo Domingo - Miami",
-        latlng: [18.4861, -69.9312]
+        
       },
       {
         destination: "Barranquilla",
-        route: "Barranquilla - Miami",
-        latlng: [10.9685, -74.7813]
+        latlng: [10.9685, -74.7813],
+        route: "Barranquilla - Miami"
+        
       },
       {
         destination: "Cartagena",
-        route: "Cartagena - Miami",
-        latlng: [10.391, -75.4794]
+        latlng: [10.391, -75.4794],
+        route: "Cartagena - Miami"
+        
       },
       {
         destination: "Bogota",
-        route: "Rio Hacha - Bogota - Miami",
-        latlng: [4.7109, -74.0721]
+        latlng: [4.7109, -74.0721],
+        route: "Rio Hacha - Bogota - Miami"
+        
       },
       {
         destination: "Bogota",
-        route: "Caracas - Bogota - Miami",
-        latlng: [4.7109, -74.0721]
+        latlng: [4.7109, -74.0721],
+        route: "Caracas - Bogota - Miami"
+        
       },
       {
         destination: "Caracas",
-        route: "Maracaibo - Caracas - Miami",
-        latlng: [10.4806, -66.9036]
+        latlng: [10.4806, -66.9036],
+        route: "Maracaibo - Caracas - Miami"
+        
       },
       {
         destination: "Rio Hacha",
+        latlng: [11.5449, -72.9073],
         route: "Maracaibo - Rio Hacha - Miami",
-        latlng: [11.5449, -72.9073]
+        
       }
     ]
   }
@@ -55,7 +63,7 @@ for (let i = 0; i < startingPoints.length; i++) {
   let startingPoint = startingPoints[i];
   let startingMarker = L.marker(startingPoint.latlng).addTo(map);
   startingMarker.bindPopup("<b>" + startingPoint.name + "</b><br>Hi! You just clicked " + startingPoint.name + ", Venezuela. This is your starting point. This is where I lived before moving to the US. All the pins that just appeared are different routes you will need to take to get to the US. Click on another pin to explain how to get to Miami traveling through there!");
-  startingMarker.on('click', function(e) {
+  startingMarker.addEventListener('click', function(e) {
     map.eachLayer(function(layer) {
       if (layer instanceof L.Marker && layer !== e.target) {
         map.removeLayer(layer);
@@ -71,10 +79,9 @@ for (let i = 0; i < startingPoints.length; i++) {
       let route = startingPoint.routes[j];
       let destinationMarker = L.marker(route.latlng).addTo(map);
       destinationMarker.bindPopup("<b>" + route.destination + "</b><br>" + route.route);
-      destinationMarker.on('click', function(e) {
+      destinationMarker.addEventListener('click', function(e) {
         let startingLatLng = e.target._popup._source._latlng;
         let destinationLatLng = e.latlng;
-        let polyline = L.polyline([startingLatLng, destinationLatLng], {color: 'blue'}).addTo(map);
         
         map.eachLayer(function(layer) {
           if (layer instanceof L.Marker && (layer !== e.target && layer !== selectedDestinationMarker && layer !== startingMarker)) {
@@ -97,60 +104,117 @@ for (let i = 0; i < startingPoints.length; i++) {
   });
 }
 
+const showAllRoutesBtn = document.querySelector('#show-all-routes');
+const showMostExpensiveRoutesBtn = document.querySelector('#show-expensive-routes');
+const showEasiestRouteBtn = document.querySelector('#show-easiest-route');
+const showHardestRouteBtn = document.querySelector('#show-hardest-route');
+const showPlaneRoutesBtn = document.querySelector('#show-plane-routes');
+const showMixRoutesBtn = document.querySelector('#show-mix-routes');
+const resetMapBtn = document.querySelector('#reset-map');
+
+showAllRoutesBtn.addEventListener('click', showAllRoutes);
+showMostExpensiveRoutesBtn.addEventListener('click', showMostExpensiveRoutes);
+showEasiestRouteBtn.addEventListener('click', showEasiestRoute);
+showHardestRouteBtn.addEventListener('click', showHardestRoute);
+showPlaneRoutesBtn.addEventListener('click', showPlaneRoutes);
+showMixRoutesBtn.addEventListener('click', showMixRoutes);
+resetMapBtn.addEventListener('click', resetMap);
+
 function showAllRoutes() {
+  map.eachLayer(function(layer) {
+    if (layer instanceof L.Marker || layer instanceof L.Popup) {
+      map.removeLayer(layer);
+    }
+  });
+  let bounds = [];
   for (let i = 0; i < startingPoints.length; i++) {
     let startingPoint = startingPoints[i];
     for (let j = 0; j < startingPoint.routes.length; j++) {
       let route = startingPoint.routes[j];
-
       let destinationMarker = L.marker(route.latlng).addTo(map);
       destinationMarker.bindPopup("<b>" + route.destination + "</b><br>" + route.route);
-
-      let startingLatLng = startingPoint.latlng;
-      let destinationLatLng = route.latlng;
+      bounds.push(destinationMarker.getLatLng());
     }
+    ;
   }
-
-  let allMarkers = startingPoints.flatMap(startingPoint => startingPoint.routes.map(route => L.marker(route.latlng)));
-  allMarkers.push(L.marker(startingPoints[0].latlng)); 
-  let bounds = L.latLngBounds(allMarkers.map(marker => marker.getLatLng()));
-  map.fitBounds(bounds);
-}
+  map.fitBounds(bounds); 
+};
 
 function showMostExpensiveRoutes() {
-  let secondDestinations = ["Santo Domingo", "Panama", "Bogota", "Caracas"];
-  let allMarkers = [];
-
+  map.eachLayer(function(layer) {
+    if (layer instanceof L.Marker || layer instanceof L.Popup) {
+      map.removeLayer(layer);
+    }
+  });
+  let bounds = [];
   for (let i = 0; i < startingPoints.length; i++) {
     let startingPoint = startingPoints[i];
     for (let j = 0; j < startingPoint.routes.length; j++) {
       let route = startingPoint.routes[j];
-
-      if (secondDestinations.includes(route.destination)) {
+      if (["Santo Domingo", "Panama", "Bogota", "Caracas"].includes(route.destination)) {
         let destinationMarker = L.marker(route.latlng).addTo(map);
         destinationMarker.bindPopup("<b>" + route.destination + "</b><br>" + route.route);
-
-        let startingLatLng = startingPoint.latlng;
-        let destinationLatLng = route.latlng;
-
-        allMarkers.push(destinationMarker);
+        bounds.push(route.latlng);
       }
     }
+    ;
   }
-
-  allMarkers.push(L.marker(startingPoints[0].latlng));
-
-  let bounds = L.latLngBounds(allMarkers.map(marker => marker.getLatLng()));
   map.fitBounds(bounds);
-}
-
-
+};
 
 function showEasiestRoute() {
+  map.eachLayer(function(layer) {
+    if (layer instanceof L.Marker || layer instanceof L.Popup) {
+      map.removeLayer(layer);
+    }
+  });
+  let bounds = [];
+  for (let i = 0; i < startingPoints.length; i++) {
+     let startingPoint = startingPoints[i];
+     for (let j = 0; j < startingPoint.routes.length; j++) {
+       let route = startingPoint.routes[j];
+       if (["Panama"].includes(route.destination)) {
+          let destinationMarker = L.marker(route.latlng).addTo(map);
+          destinationMarker.bindPopup("<b>" + route.destination + "</b><br>" + route.route);
+       }
+       bounds.push(route.latlng);
+     }
+     ;
+   }
+    map.fitBounds(bounds);
 }
 
+function showHardestRoute() {
+  map.eachLayer(function(layer) {
+    if (layer instanceof L.Marker || layer instanceof L.Popup) {
+      map.removeLayer(layer);
+    }
+  });
+  let bounds = [];
+  for (let i = 0; i < startingPoints.length; i++) {
+    let startingPoint = startingPoints[i];
+    for (let j = 0; j < startingPoint.routes.length; j++) {
+      let route = startingPoint.routes[j];
+      if (["Rio Hacha"].includes(route.destination)) {
+        let destinationMarker = L.marker(route.latlng).addTo(map);
+        destinationMarker.bindPopup("<b>" + route.destination + "</b><br>" + route.route);
+        bounds.push(route.latlng);
+      }
+    }
+    ;
+  }
+    map.fitBounds(bounds);
+  }
+
+
 function showPlaneRoutes() {
+
 }
 
 function showMixRoutes() {
+
 }
+
+function resetMap() {
+
+ }
