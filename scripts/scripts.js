@@ -3,49 +3,43 @@ const startingPoints = [{name: "Maracaibo", latlng: [10.6488, -71.6631],
       {
         destination: "Panama",
         latlng: [8.9824, -79.5199],
-        route: "Panama - Miami"
+        route: "Hi there! Panama is one of the easiest routes used to get to Miami. You must take a plane from Maracaibo to Panama and then a direct flight to Miami. Since it's the fastest, most convenient route, it is one of the most expensive routes to take! If you can afford it, this is your best option."
         
       },
       {
         destination: "Santo Domingo",
         latlng: [18.4861, -69.9312],
-        route: "Caracas - Santo Domingo - Miami",
+        route: "Hey! This is one of the trickiest routes to take, but is also as convenient as the Panama route since you can only take it by plane. You'll have to take a flight from Maracaibo to Caracas, then a flight from Caracas to Santo Domingo, and then a direct flight to Miami from there! It is also part of the pricey ones, but it'll get you there with the least troubles.",
         
       },
       {
         destination: "Barranquilla",
         latlng: [10.9685, -74.7813],
-        route: "Barranquilla - Miami"
+        route: "Hello! This route is considered one of the most dangerous ones because you must drive through the Colombian-Venezuelan border and then find a ride in Colombia that will take you to Barranquilla. Then in Barranquilla, you can take either a direct flight to Miami or fly into Bogota to leave from there. If you've taken this route, you took because it's cheaper than normal or you're definitely a true thrill-seeker."
         
       },
       {
         destination: "Cartagena",
         latlng: [10.391, -75.4794],
-        route: "Cartagena - Miami"
+        route: "Hi! This route also consists of a combination between air and land travel. You must find a ride to the Colombian-Venezuelan border and reach Barranquilla by finding another driver who'll take you there. From Cartagena, you can take a direct flight to Miami. It really isn't easy to cross the border safely, but it's one of the most affordable ways to travel outside the country! "
         
       },
       {
         destination: "Bogota",
         latlng: [4.7109, -74.0721],
-        route: "Rio Hacha - Bogota - Miami"
-        
-      },
-      {
-        destination: "Bogota",
-        latlng: [4.7109, -74.0721],
-        route: "Caracas - Bogota - Miami"
+        route: "Hello you! The Bogota route is one of the most versatile routes for Venezuelans. You can either fly from Maracaibo to Caracas and then catch a flight to Bogota (or you can try traveling by land, but no one really does this when going through Bogota because it's far). It is also considered one of the most expensive routes too because of the travel distances, but it is convenient because it's just a series of connecting flights taken by plane to reach Miami."
         
       },
       {
         destination: "Caracas",
         latlng: [10.4806, -66.9036],
-        route: "Maracaibo - Caracas - Miami"
+        route: "Hola! The Caracas route is one of the most typical routes people take to get to Miami. You can take a plane from Maracaibo to Caracas and then from there either choose the Santo Domingo or Bogota route to get out of the country!"
         
       },
       {
         destination: "Rio Hacha",
         latlng: [11.5449, -72.9073],
-        route: "Maracaibo - Rio Hacha - Miami",
+        route: "Oh, well, hello! This is the hardest and scariest route for most Venezuelans. You need to drive to the Colombian-Venezuelan border and walk by foot across the border. Sometimes, people have to cross rivers to get to the other side, especially when the border is closed. Then, once you reach Rio Hacha, which is the closest city to the border, you can take a plane to a neighboring Colombian city, and once there, you can take a direct flight to Miami. This route is not for everyone. Beware.",
         
       }
     ]
@@ -66,9 +60,6 @@ for (let i = 0; i < startingPoints.length; i++) {
   startingMarker.addEventListener('click', function(e) {
     map.eachLayer(function(layer) {
       if (layer instanceof L.Marker && layer !== e.target) {
-        map.removeLayer(layer);
-      }
-      if (layer instanceof L.Polyline) {
         map.removeLayer(layer);
       }
     });
@@ -256,9 +247,6 @@ function resetMap() {
     if (layer instanceof L.Marker) {
       map.removeLayer(layer);
     }
-    if (layer instanceof L.Polyline) {
-      map.removeLayer(layer);
-    }
   });
   let startingPoint = startingPoints[0];
   let startingMarker = L.marker(startingPoint.latlng).addTo(map);
@@ -266,9 +254,6 @@ function resetMap() {
   startingMarker.addEventListener('click', function(e) {
     map.eachLayer(function(layer) {
       if (layer instanceof L.Marker && layer !== e.target) {
-        map.removeLayer(layer);
-      }
-      if (layer instanceof L.Polyline) {
         map.removeLayer(layer);
       }
     });
